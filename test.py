@@ -32,7 +32,7 @@ def update_value(input_data):
                 {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': orientation},
             ],
             'layout': {
-                'title': orientation
+                'title': str(orientation)
             }
         }
     )
