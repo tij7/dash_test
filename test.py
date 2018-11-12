@@ -6,6 +6,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 app = dash.Dash()
+sense = SenseHat();
 
 app.layout = html.Div(children=[
     html.Div(children='''
@@ -22,12 +23,13 @@ app.layout = html.Div(children=[
 def update_value(input_data):
     start = datetime.datetime(2015, 1, 1)
     end = datetime.datetime.now()
+    orientation = sense.get_orientation_degrees()
 
     return dcc.Graph(
         id='example-graph',
         figure={
             'data': [
-                {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': input_data},
+                {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': orientation},
             ],
             'layout': {
                 'title': input_data
