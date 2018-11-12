@@ -7,6 +7,7 @@ from dash.dependencies import Input, Output
 
 app = dash.Dash()
 sense = SenseHat();
+sense.set_imu_config(False, False, True)  # gyroscope only
 
 app.layout = html.Div(children=[
     html.Div(children='''
