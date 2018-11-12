@@ -1,4 +1,3 @@
-import pandas_datareader.data as web
 import datetime
 import dash
 import dash_core_components as dcc
@@ -22,16 +21,12 @@ app.layout = html.Div(children=[
 def update_value(input_data):
     start = datetime.datetime(2015, 1, 1)
     end = datetime.datetime.now()
-    df = web.DataReader(input_data, 'morningstar', start, end)
-    df.reset_index(inplace=True)
-    df.set_index("Date", inplace=True)
-    df = df.drop("Symbol", axis=1)
 
     return dcc.Graph(
         id='example-graph',
         figure={
             'data': [
-                {'x': df.index, 'y': df.Close, 'type': 'line', 'name': input_data},
+                {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': input_data},
             ],
             'layout': {
                 'title': input_data
