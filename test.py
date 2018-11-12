@@ -1,3 +1,4 @@
+from sense_hat import SenseHat
 import datetime
 import dash
 import dash_core_components as dcc
