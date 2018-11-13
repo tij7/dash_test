@@ -30,7 +30,7 @@ def update_value(input_data):
     y = acc['y']
     x = acc['x']
     
-    angle = np.arctan2(z, np.sqrt(x**2 + y**2)) * 180 / np.pi
+    angle = np.arctan2(np.sqrt(x**2 + y**2), z) * 180 / np.pi
 
     return dcc.Graph(
         id='example-graph',
