@@ -3,6 +3,7 @@ import datetime
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import numpy as np
 from dash.dependencies import Input, Output
 
 app = dash.Dash()
@@ -24,16 +25,21 @@ app.layout = html.Div(children=[
 def update_value(input_data):
     start = datetime.datetime(2015, 1, 1)
     end = datetime.datetime.now()
-    orientation = sense.get_orientation_degrees()
+    acc = sense.get_accelerometer_raw()
+    z = acc['z']
+    y = acc['y']
+    x = acc['x']
+    
+    angle = np.arctan2(z, np.sqrt(x**2 + y**2)) * 180 / np.pi
 
     return dcc.Graph(
         id='example-graph',
         figure={
             'data': [
-                {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': orientation},
+                {'x': [1, 2, 3, 4, 5], 'y': [3, 5, 6, 1, 9], 'type': 'line', 'name': angle},
             ],
             'layout': {
-                'title': str(orientation)
+                'title': str(angle)
             }
         }
     )
