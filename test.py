@@ -15,8 +15,23 @@ app.layout = html.Div(children=[
         Symbol to graph:
     '''),
     dcc.Input(id='input', value='', type='text'),
-    html.Div(id='output-graph'),
+    html.Div(id='output-graph'), 
+    html.Div(dcc.Input(id='input-box', type='text')),
+    html.Button('Submit', id='button'),
+    html.Div(id='output-container-button',
+             children='Enter a value and press submit')
 ])
+
+@app.callback(
+    dash.dependencies.Output('output-container-button', 'children'),
+    [dash.dependencies.Input('button', 'n_clicks')],
+    [dash.dependencies.State('input-box', 'value')])
+def update_output(n_clicks, value):
+    return 'The input value was "{}" and the button has been clicked {} times'.format(
+        value,
+        n_clicks
+    )
+
 
 @app.callback(
     Output(component_id='output-graph', component_property='children'),
